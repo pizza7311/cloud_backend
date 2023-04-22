@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { join } from 'path';
         path: join(process.cwd(), 'src/graphql.schema.ts'),
       },
     }),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

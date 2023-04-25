@@ -26,6 +26,9 @@ export class User {
   @CreateDateColumn()
   joined_at: Date;
 
+  @Column({ default: 1 })
+  access_level: number;
+
   @Column({ default: true })
   active: boolean;
 

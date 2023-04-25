@@ -1,0 +1,14 @@
+scalar Date
+
+type User {
+  uid: String
+  email: String
+  username: String
+  joined_at: Date
+  access_level: Int
+}
+
+type Query {
+  user: User
+  users: [User]
+}

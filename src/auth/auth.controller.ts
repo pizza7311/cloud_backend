@@ -16,13 +16,16 @@ export class AuthController {
 
   @HttpCode(HttpStatus.OK)
   @Post('login')
-  login(@Body() loginDTO: LoginDTO) {
-    this.auth.login(loginDTO);
+  async login(
+    @Body() loginDTO: LoginDTO,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    return await this.auth.login(loginDTO, res);
   }
 
   @HttpCode(HttpStatus.OK)
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
-    this.auth.logout(res);
+    return this.auth.logout(res);
   }
 }

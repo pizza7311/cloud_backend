@@ -9,6 +9,6 @@ type User {
 }
 
 type Query {
-  user: User
+  user(uid: String!): User
   users: [User]
 }

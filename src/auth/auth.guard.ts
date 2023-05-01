@@ -6,17 +6,19 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Request } from 'express';
+import { GqlExecutionContext } from '@nestjs/graphql';
 
 @Injectable()
 export class AuthGuard implements CanActivate {
   constructor(private jwt: JwtService) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
-    const req = context.switchToHttp().getRequest();
+    const ctx = GqlExecutionContext.create(context);
+    const req = ctx.getContext().req;
     const { access, refresh } = getAccessAndRefresh(req);
 
     //TODO: rtr 구현 필요
-    if (access && refresh) {
+    if (!access && !refresh) {
       throw new UnauthorizedException();
     }
 
@@ -35,8 +37,6 @@ export class AuthGuard implements CanActivate {
 const getAccessAndRefresh = (
   req: Request,
 ): { access: string; refresh: string } => {
-  const access = req.cookies('access_token');
-  const refresh = req.cookies('refresh_token');
-
-  return { access, refresh };
+  const { access_token, refresh_token } = req.cookies;
+  return { access: access_token, refresh: refresh_token };
 };

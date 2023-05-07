@@ -21,7 +21,7 @@ export class UserGuard implements CanActivate {
     const req = ctx.getContext().req;
     const args = ctx.getArgs();
 
-    const user = await this.repo.findOneBy({ uid: args.uid });
+    const user = await this.repo.findOneBy({ uid: args.uid, active: true });
 
     if (!user) {
       throw new NotFoundException();

@@ -12,3 +12,7 @@ type Query {
   user(uid: String!): User
   users: [User]
 }
+
+type Mutation {
+  deleteUser(uid: String!): String #삭제한 사용자 uid
+}

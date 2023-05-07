@@ -32,8 +32,11 @@ export class User {
   @Column({ default: true })
   active: boolean;
 
+  @Column({ nullable: true })
+  deleted_at: Date;
+
   @BeforeInsert()
-  encryptPassword = () => {
+  encryptPassword() {
     this.password = encryptWithSHA512(this.password);
-  };
+  }
 }

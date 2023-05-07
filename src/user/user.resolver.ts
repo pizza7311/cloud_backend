@@ -1,4 +1,4 @@
-import { Args, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 import { UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
@@ -12,5 +12,11 @@ export class UserResolver {
   @UseGuards(AuthGuard, UserGuard)
   async user(@Args('uid') uid: string) {
     return this.userService.findOneById(uid);
+  }
+
+  @Mutation()
+  @UseGuards(AuthGuard, UserGuard)
+  async deleteUser(@Args('uid') uid: string) {
+    return this.userService.deleteUser(uid);
   }
 }

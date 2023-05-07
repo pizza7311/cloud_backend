@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { User } from './user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { ChangeUsernameArgs } from './dto/changeUsername.args';
 
 @Injectable()
 export class UserService {
@@ -25,5 +26,10 @@ export class UserService {
       throw e;
     }
     return uid;
+  }
+
+  async changeUsername(args: ChangeUsernameArgs): Promise<boolean> {
+    await this.repo.update({ uid: args.uid }, { username: args.username });
+    return true;
   }
 }

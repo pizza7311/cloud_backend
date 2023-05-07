@@ -3,6 +3,7 @@ import { UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { AuthGuard } from 'src/auth/guard/auth.guard';
 import { UserGuard } from './guard/user.guard';
+import { ChangeUsernameArgs } from './dto/changeUsername.args';
 
 @Resolver('User')
 export class UserResolver {
@@ -18,5 +19,11 @@ export class UserResolver {
   @UseGuards(AuthGuard, UserGuard)
   async deleteUser(@Args('uid') uid: string) {
     return this.userService.deleteUser(uid);
+  }
+
+  @Mutation()
+  @UseGuards(AuthGuard, UserGuard)
+  async changeUsername(@Args() args: ChangeUsernameArgs) {
+    return this.userService.changeUsername(args);
   }
 }

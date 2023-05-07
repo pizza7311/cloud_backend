@@ -16,3 +16,7 @@ type Query {
 type Mutation {
   deleteUser(uid: String!): String #삭제한 사용자 uid
 }
+
+type Mutation {
+  changeUsername(uid: String!, username: String!): Boolean
+}

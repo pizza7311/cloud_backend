@@ -11,8 +11,8 @@ export class UserService {
     private repo: Repository<User>,
   ) {}
 
-  findOneById(uid: string): Promise<User | null> {
-    return this.repo.findOneBy({ uid });
+  findOneById(uid: string, active = false): Promise<User | null> {
+    return this.repo.findOneBy({ uid, active });
   }
 
   async deleteUser(uid: string): Promise<string> {

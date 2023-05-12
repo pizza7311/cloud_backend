@@ -51,8 +51,14 @@ export class AuthService {
       expiresIn: '30d',
     });
 
-    res.cookie('access_token', accessToken);
-    res.cookie('refresh_token', refreshToken);
+    res.cookie('access_token', accessToken, {
+      maxAge: 60 * 60 * 1000,
+      httpOnly: true,
+    });
+    res.cookie('refresh_token', refreshToken, {
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+      httpOnly: true,
+    });
 
     return { access_token: accessToken };
   }

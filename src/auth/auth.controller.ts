@@ -4,11 +4,17 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  Redirect,
+  Get,
   Res,
+  UseGuards,
+  UseFilters,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { LoginDTO } from './dto/login.dto';
 import { Response } from 'express';
+import { AuthGuard } from './guard/auth.guard';
+import { UnauthorizedFilter } from './filters/unauthorized.filter';
 
 @Controller('auth')
 export class AuthController {
@@ -27,5 +33,13 @@ export class AuthController {
   @Post('logout')
   logout(@Res({ passthrough: true }) res: Response) {
     return this.auth.logout(res);
+  }
+
+  @Get('/check')
+  @UseGuards(AuthGuard)
+  @UseFilters(UnauthorizedFilter)
+  @Redirect('http://localhost:3000/my-drive', 302)
+  checkLogin() {
+    return null;
   }
 }

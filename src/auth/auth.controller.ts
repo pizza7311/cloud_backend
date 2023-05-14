@@ -4,7 +4,6 @@ import {
   HttpCode,
   HttpStatus,
   Post,
-  Redirect,
   Get,
   Res,
   UseGuards,
@@ -38,8 +37,7 @@ export class AuthController {
   @Get('/check')
   @UseGuards(AuthGuard)
   @UseFilters(UnauthorizedFilter)
-  @Redirect('http://localhost:3000/my-drive', 302)
   checkLogin() {
-    return null;
+    return true;
   }
 }

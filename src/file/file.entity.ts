@@ -4,9 +4,15 @@ import {
   CreateDateColumn,
   Entity,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
+import { FileType } from 'src/types/file.types';
+
+/*
+    드라이브의 file과 folder 공용으로 사용
+*/
 @Entity()
 export class File {
   @PrimaryGeneratedColumn('uuid')
@@ -42,4 +48,16 @@ export class File {
   @Column()
   @ManyToOne(() => User, (user) => user.uid)
   owner: string;
+
+  //파일,폴더 여부
+  @Column({ type: 'enum', length: 10, enum: FileType })
+  type: string;
+
+  //공유 여부
+  @Column({ default: false })
+  shared: boolean;
+
+  @Column({ nullable: true })
+  @OneToMany(() => File, (file) => file.file_id)
+  parent: string;
 }

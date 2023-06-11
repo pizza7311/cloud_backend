@@ -1,16 +1,19 @@
 import { IsEmail } from 'class-validator';
+import { File } from 'src/file/file.entity';
 import { encryptWithSHA512 } from 'src/utils/encrypt';
 import {
   BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
+  @OneToMany(() => File, (file) => file.owner)
   uid: string;
 
   @Column()

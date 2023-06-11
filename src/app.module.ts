@@ -9,6 +9,7 @@ import { AuthModule } from './auth/auth.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
 import { DataSource } from 'typeorm';
+import { FileModule } from './file/file.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { DataSource } from 'typeorm';
     }),
     AuthModule,
     UserModule,
+    FileModule,
   ],
   controllers: [AppController],
   providers: [AppService],

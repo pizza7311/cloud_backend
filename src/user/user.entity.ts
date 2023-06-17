@@ -1,5 +1,5 @@
 import { IsEmail } from 'class-validator';
-import { File } from 'src/file/file.entity';
+import { File } from 'src/file/item.entity';
 import { encryptWithSHA512 } from 'src/utils/encrypt';
 import {
   BeforeInsert,

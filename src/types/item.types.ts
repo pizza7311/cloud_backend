@@ -1,4 +1,4 @@
-export enum FileType {
+export enum ItemType {
   FILE = 'file',
   FOLDER = 'folder',
 }

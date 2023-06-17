@@ -8,15 +8,15 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-import { FileType } from 'src/types/file.types';
+import { ItemType } from 'src/types/item.types';
 
 /*
     드라이브의 file과 folder 공용으로 사용
 */
 @Entity()
-export class File {
+export class Item {
   @PrimaryGeneratedColumn('uuid')
-  file_id: string;
+  item_id: string;
 
   @Column({ length: 200 })
   file_name: string;
@@ -50,7 +50,7 @@ export class File {
   owner: string;
 
   //파일,폴더 여부
-  @Column({ type: 'enum', length: 10, enum: FileType })
+  @Column({ type: 'enum', length: 10, enum: ItemType })
   type: string;
 
   //공유 여부
@@ -58,6 +58,6 @@ export class File {
   shared: boolean;
 
   @Column({ nullable: true })
-  @OneToMany(() => File, (file) => file.file_id)
+  @OneToMany(() => Item, (item) => item.item_id)
   parent: string;
 }

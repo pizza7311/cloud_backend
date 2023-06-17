@@ -51,12 +51,13 @@ export class Item {
 
   //파일,폴더 여부
   @Column({ type: 'enum', length: 10, enum: ItemType })
-  type: string;
+  item_type: string;
 
   //공유 여부
   @Column({ default: false })
   shared: boolean;
 
+  //item_type이 file일 경우 부모폴더 id
   @Column({ nullable: true })
   @OneToMany(() => Item, (item) => item.item_id)
   parent: string;

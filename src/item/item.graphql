@@ -1,0 +1,35 @@
+scalar Date
+
+enum itemType {
+  FILE
+  FOLDER
+}
+
+type Item {
+  itemId: String
+  fileName: String
+  fileExtension: String
+  uploadedAt: Date
+  modifiedAt: Date
+  size: Int
+  thumbnailUrl: String
+  owner: String
+  type: itemType
+  shared: Boolean
+  parent: String
+}
+
+type Test {
+  test: String
+}
+
+type Query {
+  item: Item
+  directoryFiles(folderId: String!): [Item] #폴더 id로 해당폴더안에 있는 파일목록
+  myDrive: Test
+}
+
+type Mutation {
+  addFile(fileName: String!, fileExtension: String!, size: Int!): String
+  addFolder(fileName: String!, parent: String!): String
+}

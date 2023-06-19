@@ -50,7 +50,7 @@ export class Item {
   owner: string;
 
   //파일,폴더 여부
-  @Column({ type: 'enum', length: 10, enum: ItemType })
+  @Column({ type: 'enum', enum: ItemType })
   item_type: string;
 
   //공유 여부

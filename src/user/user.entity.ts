@@ -1,5 +1,5 @@
 import { IsEmail } from 'class-validator';
-import { File } from 'src/file/item.entity';
+import { Item } from 'src/item/item.entity';
 import { encryptWithSHA512 } from 'src/utils/encrypt';
 import {
   BeforeInsert,
@@ -13,7 +13,7 @@ import {
 @Entity()
 export class User {
   @PrimaryGeneratedColumn('uuid')
-  @OneToMany(() => File, (file) => file.owner)
+  @OneToMany(() => Item, (item) => item.owner)
   uid: string;
 
   @Column()
